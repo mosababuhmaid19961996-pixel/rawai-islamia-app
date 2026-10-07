@@ -40,6 +40,7 @@
       </div>
       <label class="switch"><input id="autoPlayToggle" type="checkbox"><span></span></label>
     </div>
+    <div class="setting-card"><div class="setting-icon">⏰</div><div class="setting-info"><h2>أوقات التذكير</h2><p>اختر حتى 3 أوقات يومية للتذكير. اتركها فارغة للعودة إلى تذكير كل 3 ساعات.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="rem1" type="time"><input id="rem2" type="time"><input id="rem3" type="time"><button id="saveTimes" class="setting-action">حفظ الأوقات</button></div></div></div>
     <div class="setting-card"><div class="setting-icon">🌓</div><div class="setting-info"><h2>الوضع الليلي</h2><p>تبديل مظهر التطبيق بين الوضع المريح والوضع الفاتح.</p></div><label class="switch"><input id="darkToggle" type="checkbox"><span></span></label></div>
     <div class="setting-card"><div class="setting-icon">🔀</div><div class="setting-info"><h2>تشغيل عشوائي وتكرار</h2><p>تحكم في ترتيب التشغيل عند استخدام التشغيل التلقائي.</p></div><div><label class="switch"><input id="shuffleToggle" type="checkbox"><span></span></label><label class="switch"><input id="repeatToggle" type="checkbox"><span></span></label></div></div>
     <div class="setting-card"><div class="setting-icon">🧭</div><div class="setting-info"><h2>مركز الأدوات</h2><p>المفضلة، المسبحة، الورد اليومي، مواقيت الصلاة والإنجازات.</p><a class="setting-action" href="more.html">فتح مركز الأدوات</a></div></div>
@@ -52,6 +53,18 @@
   const n=document.getElementById('notificationsToggle');
   const a=document.getElementById('autoPlayToggle');
   const p=document.getElementById('notificationPermission');
+  const dark=document.getElementById('darkToggle'), sh=document.getElementById('shuffleToggle'), rep=document.getElementById('repeatToggle');
+  const times=['rem1','rem2','rem3'].map(id=>document.getElementById(id));
+  const savedTimes=(window.Android&&typeof Android.notificationTimes==='function')?Android.notificationTimes():'';
+  (savedTimes||'').split(',').forEach((v,i)=>{if(times[i]&&v)times[i].value=v});
+  document.getElementById('saveTimes').addEventListener('click',()=>{const vals=times.map(x=>x.value).filter(Boolean);if(window.Android&&typeof Android.setNotificationTimes==='function'){Android.setNotificationTimes(vals.join(','));}else{alert('أوقات التذكير تعمل داخل تطبيق أندرويد.')}});
+  dark.checked=localStorage.getItem('rawai-dark')==='true';
+  sh.checked=localStorage.getItem('rawai-shuffle')==='true';
+  rep.checked=localStorage.getItem('rawai-repeat')==='true';
+  if(dark.checked)document.body.classList.add('dark');
+  dark.addEventListener('change',()=>{localStorage.setItem('rawai-dark',dark.checked?'true':'false');document.body.classList.toggle('dark',dark.checked)});
+  sh.addEventListener('change',()=>localStorage.setItem('rawai-shuffle',sh.checked?'true':'false'));
+  rep.addEventListener('change',()=>localStorage.setItem('rawai-repeat',rep.checked?'true':'false'));
 
   a.checked=isAutoPlayEnabled();
   a.addEventListener('change',()=>setAutoPlayEnabled(a.checked));
