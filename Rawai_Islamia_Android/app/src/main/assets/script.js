@@ -66,7 +66,17 @@ function playButton(btn){
   btn.textContent='❚❚';
   if(trackEl)trackEl.textContent=btn.dataset.track||'تشغيل الآن';
   audio.addEventListener('play',()=>announcePlayback(src));
-  audio.addEventListener('ended',()=>{btn.textContent='▶';if(line)line.style.width='0%';if(time)time.textContent='00:00'});
+  audio.addEventListener('ended',()=>{
+  btn.textContent='▶';
+  if(line)line.style.width='0%';
+  if(time)time.textContent='00:00';
+  if(localStorage.getItem('rawai-auto-play')==='true'){
+    const buttons=[...document.querySelectorAll('.play[data-audio]')];
+    const index=buttons.indexOf(btn);
+    const next=index>=0?buttons[index+1]:null;
+    if(next&&next.dataset.audio) setTimeout(()=>playButton(next),250);
+  }
+});
   audio.addEventListener('pause',()=>{if(btn)btn.textContent='▶'});
   audio.addEventListener('timeupdate',()=>{const pct=audio.duration?(audio.currentTime/audio.duration)*100:0;if(line)line.style.width=pct+'%';if(time)time.textContent=fmt(audio.currentTime)});
   audio.play().catch(()=>{btn.textContent='▶'});
@@ -106,3 +116,26 @@ const GLOBAL_SEARCH_INDEX=[
   box.hidden=false;
  });
 })();
+
+
+function isAutoPlayEnabled(){
+  return localStorage.getItem('rawai-auto-play')==='true';
+}
+function setAutoPlayEnabled(enabled){
+  localStorage.setItem('rawai-auto-play',enabled?'true':'false');
+}
+function isNotificationsEnabled(){
+  try{
+    return window.Android&&typeof Android.notificationsEnabled==='function'
+      ? Android.notificationsEnabled() : false;
+  }catch(e){return false}
+}
+function setNotificationsEnabled(enabled){
+  try{
+    if(window.Android&&typeof Android.setNotificationsEnabled==='function'){
+      Android.setNotificationsEnabled(!!enabled);
+      return true;
+    }
+  }catch(e){}
+  return false;
+}
