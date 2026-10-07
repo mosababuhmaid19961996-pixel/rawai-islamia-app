@@ -1,0 +1,24 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>البحث الشامل</title><link rel="stylesheet" href="style.css"></head><body><header><a class="logo" href="index.html"><b>روائع إسلامية</b><small>البحث الشامل</small></a></header><main class="inside"><a class="back" href="index.html">← الرئيسية</a><section class="section-hero"><h1>🔎 البحث الشامل</h1><p>ابحث بكلمة واحدة للوصول بسرعة إلى أقسام روائع إسلامية ومصادر القرآن.</p></section><label class="global-search">⌕<input id="q" type="search" placeholder="مثال: الصلاة، رمضان، يوسف..." autofocus></label><div id="status"></div><div id="results"></div></main><script src="script.js"></script><script>
+const local=[
+['📖 القرآن الكريم','quran-mushaf.html','السور الآيات القرآن المصحف تلاوة'],
+['📚 الأحاديث النبوية','hadith.html','حديث أحاديث السنة البخاري مسلم'],
+['📿 الأدعية الموسعة','duas-expanded.html','دعاء أدعية ذكر أذكار استغفار'],
+['⚖️ الفقه والمسائل','fiqh.html','فقه فتوى صلاة صيام زكاة حج'],
+['🕋 الحج والعمرة','hajj-umrah-guide.html','حج عمرة طواف سعي عرفة'],
+['🌙 رمضان والصيام','ramadan-expanded.html','رمضان صيام تراويح ليلة القدر زكاة الفطر'],
+['🌿 قصص الصالحين','righteous.html','قصص صالحين أصحاب الكهف مريم'],
+['⚔️ الغزوات والمعارك','battles.html','بدر أحد الخندق خيبر حنين تبوك'],
+['🧭 القبلة','qibla.html','قبلة اتجاه مكة'],
+['🕌 مواقيت الصلاة','prayer-times.html','الفجر الظهر العصر المغرب العشاء'],
+['🤲 الرقية الشرعية','ruqya.html','رقية شفاء قرآن دعاء'],
+['⚰️ الجنائز','janazah.html','جنازة غسل كفن دفن تعزية'],
+['👶 عالم الأطفال','kids-islam.html','أطفال تعليم أسئلة إسلام'],
+['🧩 ألعاب الأطفال','kids-games.html','لعبة ألعاب مسابقة أطفال'],
+['🧮 حاسبة الزكاة','zakat-calculator.html','زكاة مال 2.5% نصاب'],
+['🎧 مكتبة الصوتيات','audio-library.html','صوتيات قرآن أذكار خطب قصص']
+];
+function renderLocal(q){return local.filter(x=>(x[0]+' '+x[2]).includes(q)).map(x=>'<article class="tool-section"><h2>'+x[0]+'</h2><p>نتيجة من داخل التطبيق</p><a class="primary" href="'+x[1]+'">فتح القسم</a></article>').join('')}
+async function searchQuran(q){if(q.length<2)return '';try{const u='https://api.alquran.cloud/v1/search/'+encodeURIComponent(q)+'/all/ar';const j=await fetch(u);if(!j.ok)return '';const a=j.data?.matches||[];return a.slice(0,12).map(x=>'<article class="tool-section"><h2>📖 '+(x.surah?.name||'القرآن')+' — الآية '+x.numberInSurah+'</h2><p>'+x.text+'</p><small>نتيجة من القرآن الكريم</small></article>').join('')}catch(e){return ''}}
+async function run(){const q=document.getElementById('q').value.trim();const out=document.getElementById('results');if(!q){status.textContent='اكتب كلمة للبحث.';out.innerHTML='';return}status.textContent='جارٍ البحث...';const l=renderLocal(q);const quran=await searchQuran(q);out.innerHTML=l+(quran?'<h2>📖 نتائج القرآن</h2>'+quran:'');status.textContent=(l||quran)?'تم العثور على نتائج.':'لم نجد نتائج مطابقة.'}
+let timer; q.oninput=()=>{clearTimeout(timer);timer=setTimeout(run,350)};run();
+</script></body></html>
