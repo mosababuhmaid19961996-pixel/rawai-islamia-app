@@ -59,7 +59,7 @@
 const FKEY='rawai-favorites', WKEY='rawai-wird-'+new Date().toISOString().slice(0,10), TKEY='rawai-tasbih';
 function getF(){try{return JSON.parse(localStorage.getItem(FKEY)||'[]')}catch(e){return[]}}
 function renderF(){const box=document.getElementById('favoritesList'),arr=getF();box.innerHTML=arr.length?arr.map((x,i)=>'<div class="saved-item"><span>❤️</span><div><b>'+escF(x.title)+'</b><small>'+escF(x.section||'مقطع صوتي')+'</small></div><div class="saved-actions"><button onclick="playSaved('+i+')">▶</button><button onclick="removeFavorite('+i+')">×</button></div></div>').join(''):'<div class="empty-note">لا توجد مقاطع في المفضلة بعد. اضغط ❤️ بجانب أي مقطع.</div>'}
-window.playSaved=i=>{const x=getF()[i];if(x&&x.url)window.location.href='more.html#favorites';alert('افتح المقطع من قسمه الأصلي لتشغيله: '+(x?.title||''));};
+window.playSaved=i=>{const x=getF()[i];if(x&&x.page)window.location.href=x.page;else if(x&&x.url)alert('المقطع محفوظ، افتح قسمه الأصلي لتشغيله: '+(x.title||''));};
 window.removeFavorite=i=>{const a=getF();a.splice(i,1);localStorage.setItem(FKEY,JSON.stringify(a));renderF()};
 window.clearFavorites=()=>{localStorage.removeItem(FKEY);renderF()};
 function escF(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])}
