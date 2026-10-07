@@ -17,6 +17,7 @@ import android.webkit.WebViewClient;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.OnBackPressedCallback;
 import androidx.webkit.WebViewAssetLoader;
 
 public class MainActivity extends AppCompatActivity {
@@ -68,6 +69,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // زر الرجوع في شريط الهاتف: يرجع داخل صفحات التطبيق أولاً،
+        // وإذا لم توجد صفحة سابقة يغلق التطبيق بشكل طبيعي.
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override public void handleOnBackPressed() {
+                if (webView != null && webView.canGoBack()) {
+                    webView.goBack();
+                } else {
+                    finish();
+                }
+            }
+        });
+
         webView.loadUrl("https://appassets.androidplatform.net/assets/index.html");
     }
 
@@ -112,29 +125,5 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "تم حفظ أوقات التذكير", Toast.LENGTH_SHORT).show();
             });
         }
-    }
-
-    private long lastBackPress = 0L;
-    private int backPressCount = 0;
-
-    @Override public void onBackPressed() {
-        if (webView != null && webView.canGoBack()) {
-            backPressCount = 0;
-            webView.goBack();
-            return;
-        }
-
-        long now = System.currentTimeMillis();
-        if (now - lastBackPress > 2200L) backPressCount = 0;
-        backPressCount++;
-        lastBackPress = now;
-
-        if (backPressCount >= 3) {
-            super.onBackPressed();
-            return;
-        }
-
-        int remaining = 3 - backPressCount;
-        Toast.makeText(this, "اضغط زر الرجوع " + remaining + " مرات أخرى للخروج", Toast.LENGTH_SHORT).show();
     }
 }
