@@ -5,6 +5,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Build;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
 import android.webkit.URLUtil;
@@ -21,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         webView = new WebView(this);
         setContentView(webView);
+        requestNotificationPermission();
+        NotificationScheduler.schedule(this);
         WebViewAssetLoader loader = new WebViewAssetLoader.Builder()
             .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this)).build();
         webView.setWebViewClient(new WebViewClient() {
@@ -55,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
         });
         webView.loadUrl("https://appassets.androidplatform.net/assets/index.html");
     }
+    private void requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission("android.permission.POST_NOTIFICATIONS") != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"}, 1001);
+        }
+    }
+
     private long lastBackPress = 0L;
     private int backPressCount = 0;
 
