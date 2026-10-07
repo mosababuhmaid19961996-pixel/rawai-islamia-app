@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="أدوات روائع إسلامية: المفضلة، التنزيلات، التسبيح، الورد اليومي، مواقيت الصلاة والإنجازات">
+<title>المزيد - روائع إسلامية</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><a class="logo" href="index.html"><span class="logo-mark">⌂</span><span><b>روائع إسلامية</b><small>أدوات ومزايا إضافية</small></span></a>
+<nav><a href="index.html">الرئيسية</a><a class="active" href="more.html">المزيد</a><a href="settings.html">الإعدادات</a></nav>
+<div class="head-actions"><a class="icon-btn settings-link" href="settings.html">⚙</a><button id="theme" class="icon-btn">☾</button></div></header>
+<main class="inside tools-page">
+<a class="back" href="index.html">← العودة للرئيسية</a>
+<section class="section-hero tools-hero"><small>روائع إسلامية</small><h1>مركز الأدوات</h1><p>كل أدواتك اليومية في مكان واحد، مع حفظ تقدمك على جهازك.</p></section>
+
+<section class="tools-grid">
+<a class="tool-card" href="#favorites"><span>❤️</span><b>المفضلة</b><small>كل المقاطع التي حفظتها</small></a>
+<a class="tool-card" href="#downloads"><span>📥</span><b>التنزيلات</b><small>الوصول إلى الملفات التي نزّلتها</small></a>
+<a class="tool-card" href="#tasbih"><span>📿</span><b>المسبحة الإلكترونية</b><small>عداد محفوظ حتى بعد إغلاق التطبيق</small></a>
+<a class="tool-card" href="#wird"><span>📖</span><b>وردي اليومي</b><small>أذكار وتلاوة واستغفار يومي</small></a>
+<a class="tool-card" href="#prayer"><span>🕌</span><b>مواقيت الصلاة</b><small>اختر مدينتك وشاهد مواقيت اليوم</small></a>
+<a class="tool-card" href="#achievements"><span>🏆</span><b>الإنجازات</b><small>تابع تقدمك في الاستماع والذكر</small></a>
+</section>
+
+<section id="favorites" class="tool-section"><div class="tool-heading"><div><small>محفوظاتك</small><h2>❤️ المفضلة</h2></div><button class="tool-mini" onclick="clearFavorites()">مسح المفضلة</button></div><div id="favoritesList" class="saved-list"></div></section>
+<section id="downloads" class="tool-section"><div class="tool-heading"><div><small>الاستماع دون اتصال</small><h2>📥 التنزيلات</h2></div></div><div class="download-info">عند الضغط على «تنزيل الصوت» من أي مقطع، يحفظه أندرويد في مجلد التنزيلات الخاص بالتطبيق. يمكنك تشغيله لاحقًا حتى دون اتصال بالإنترنت من مدير الملفات.</div><div class="saved-list"><a class="saved-item" href="children.html"><span>🎧</span><div><b>قصص الأطفال</b><small>تحتوي المقاطع على زر تنزيل مباشر</small></div><strong>↗</strong></a><a class="saved-item" href="adhkar.html"><span>📿</span><div><b>الأدعية والأذكار</b><small>نزّل المقاطع التي تريدها للاستماع لاحقًا</small></div><strong>↗</strong></a></div></section>
+
+<section id="tasbih" class="tool-section"><div class="tool-heading"><div><small>ذكر الله</small><h2>📿 المسبحة الإلكترونية</h2></div></div>
+<div class="tasbih-box"><div class="tasbih-name">سبحان الله</div><div id="tasbihCount" class="tasbih-count">0</div><div class="tasbih-actions"><button onclick="tasbihAdd()">تسبيحة +1</button><button onclick="tasbihReset()">تصفير</button></div><div class="tasbih-presets"><button onclick="tasbihSet(33)">33</button><button onclick="tasbihSet(100)">100</button><button onclick="tasbihSet(333)">333</button></div></div></section>
+
+<section id="wird" class="tool-section"><div class="tool-heading"><div><small>وردك اليومي</small><h2>📖 الورد اليومي</h2></div></div>
+<div class="wird-list">
+<label><input type="checkbox" data-wird="quran"> قراءة القرآن اليوم</label>
+<label><input type="checkbox" data-wird="adhkar"> أذكار الصباح والمساء</label>
+<label><input type="checkbox" data-wird="istighfar"> الاستغفار 100 مرة</label>
+<label><input type="checkbox" data-wird="salawat"> الصلاة على النبي ﷺ</label>
+<label><input type="checkbox" data-wird="dua"> الدعاء</label>
+</div><div id="wirdProgress" class="progress-box"></div><button class="primary tool-link" onclick="resetWird()">بدء ورد جديد</button></section>
+
+<section id="prayer" class="tool-section"><div class="tool-heading"><div><small>اليوم</small><h2>🕌 مواقيت الصلاة</h2></div></div>
+<div class="prayer-form"><label>المدينة <select id="citySelect"><option value="Nablus">نابلس</option><option value="Ramallah">رام الله</option><option value="Jerusalem">القدس</option><option value="Gaza">غزة</option><option value="Hebron">الخليل</option><option value="Jenin">جنين</option><option value="Tulkarm">طولكرم</option></select></label><button class="primary" onclick="loadPrayerTimes()">عرض المواقيت</button></div><div id="prayerResult" class="prayer-result"></div></section>
+
+<section id="achievements" class="tool-section"><div class="tool-heading"><div><small>تقدمك</small><h2>🏆 الإنجازات</h2></div></div><div id="achievementsList" class="achievement-grid"></div></section>
+</main>
+<footer><b>روائع إسلامية</b><span>استمع • اذكر الله • تعلم</span></footer>
+<script src="script.js"></script>
+<script>
+(function(){
+const FKEY='rawai-favorites', WKEY='rawai-wird-'+new Date().toISOString().slice(0,10), TKEY='rawai-tasbih';
+function getF(){try{return JSON.parse(localStorage.getItem(FKEY)||'[]')}catch(e){return[]}}
+function renderF(){const box=document.getElementById('favoritesList'),arr=getF();box.innerHTML=arr.length?arr.map((x,i)=>'<div class="saved-item"><span>❤️</span><div><b>'+escF(x.title)+'</b><small>'+escF(x.section||'مقطع صوتي')+'</small></div><div class="saved-actions"><button onclick="playSaved('+i+')">▶</button><button onclick="removeFavorite('+i+')">×</button></div></div>').join(''):'<div class="empty-note">لا توجد مقاطع في المفضلة بعد. اضغط ❤️ بجانب أي مقطع.</div>'}
+window.playSaved=i=>{const x=getF()[i];if(x&&x.url)window.location.href='more.html#favorites';alert('افتح المقطع من قسمه الأصلي لتشغيله: '+(x?.title||''));};
+window.removeFavorite=i=>{const a=getF();a.splice(i,1);localStorage.setItem(FKEY,JSON.stringify(a));renderF()};
+window.clearFavorites=()=>{localStorage.removeItem(FKEY);renderF()};
+function escF(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])}
+function t(){return Number(localStorage.getItem(TKEY)||0)}
+function renderT(){document.getElementById('tasbihCount').textContent=t()}
+window.tasbihAdd=()=>{const n=t()+1;localStorage.setItem(TKEY,n);localStorage.setItem('rawai-ach-tasbih',n);renderT()};
+window.tasbihReset=()=>{localStorage.setItem(TKEY,0);renderT()};
+window.tasbihSet=n=>{localStorage.setItem(TKEY,n);renderT()};
+function renderW(){const data=JSON.parse(localStorage.getItem(WKEY)||'{}');document.querySelectorAll('[data-wird]').forEach(x=>x.checked=!!data[x.dataset.wird]);updateW()}
+function updateW(){const all=[...document.querySelectorAll('[data-wird]')],done=all.filter(x=>x.checked).length;document.getElementById('wirdProgress').textContent='أنجزت '+done+' من '+all.length+' اليوم — '+Math.round(done/all.length*100)+'%';const d={};all.forEach(x=>d[x.dataset.wird]=x.checked);localStorage.setItem(WKEY,JSON.stringify(d));localStorage.setItem('rawai-ach-wird',done)}
+document.querySelectorAll('[data-wird]').forEach(x=>x.addEventListener('change',updateW));
+window.resetWird=()=>{localStorage.removeItem(WKEY);renderW()};
+window.loadPrayerTimes=async()=>{const city=document.getElementById('citySelect').value,box=document.getElementById('prayerResult');box.innerHTML='<div class="loading">جارٍ جلب المواقيت...</div>';try{const d=new Date(),date=d.getDate()+'-'+(d.getMonth()+1)+'-'+d.getFullYear();const r=await fetch('https://api.aladhan.com/v1/timingsByCity/'+date+'?city='+encodeURIComponent(city)+'&country=Palestine&method=4');const j=await r.json();const p=j.data.timings;const names=[['Fajr','الفجر'],['Sunrise','الشروق'],['Dhuhr','الظهر'],['Asr','العصر'],['Maghrib','المغرب'],['Isha','العشاء']];box.innerHTML=names.map(x=>'<div class="prayer-card"><b>'+x[1]+'</b><strong>'+p[x[0]]+'</strong></div>').join('')}catch(e){box.innerHTML='<div class="empty-note">تعذر جلب المواقيت الآن. تحقق من الاتصال بالإنترنت.</div>'}};
+function ach(){const tas=Number(localStorage.getItem('rawai-ach-tasbih')||0),w=Number(localStorage.getItem('rawai-ach-wird')||0),fav=getF().length;const arr=[['📿','ذاكر','100 تسبيحة على الأقل',tas>=100],['📖','ورد ثابت','إنجاز ورد اليوم كاملًا',w>=5],['❤️','ذوق جميل','حفظ 5 مقاطع في المفضلة',fav>=5],['🌟','بداية مباركة','فتح مركز الأدوات',true]];document.getElementById('achievementsList').innerHTML=arr.map(a=>'<div class="achievement '+(a[3]?'done':'')+'"><span>'+a[0]+'</span><div><b>'+a[1]+'</b><small>'+a[2]+'</small></div><strong>'+(a[3]?'✓':'○')+'</strong></div>').join('')}
+renderF();renderT();renderW();ach();
+})();
+</script>
+</body></html>
