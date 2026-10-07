@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>روائع إسلامية | القصص الصوتية</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.stories-page{max-width:1200px;margin:0 auto;padding:0 5% 110px}.stories-hero{margin-top:28px}
+.stories-tools{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:12px;margin:26px 0}.stories-tools input,.stories-tools select{width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card,#fff);color:inherit}
+.story-stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.story-stat{background:var(--card,#fff);border:1px solid var(--line);border-radius:14px;padding:10px 14px;min-width:112px}.story-stat b{display:block;font-size:20px}.story-stat span{font-size:12px}
+.story-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.story-tab{border:1px solid var(--line);background:var(--card,#fff);padding:10px 14px;border-radius:999px;cursor:pointer}.story-tab.active{background:#6b4b12;color:#fff;border-color:#6b4b12}
+.story-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.story-card{background:var(--card,#fff);border:1px solid var(--line);border-radius:18px;padding:16px}.story-card h3{margin:0 0 7px;font-size:17px;line-height:1.6}.story-card p{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.8}.story-card audio{width:100%;display:block;min-height:42px}.source-link{display:inline-block;margin-top:9px;color:#6b4b12;font-size:11px;font-weight:700;text-decoration:none}.pagination{display:flex;gap:6px;flex-wrap:wrap;margin:24px 0}.page-btn{border:1px solid var(--line);background:var(--card,#fff);border-radius:10px;padding:8px 12px;cursor:pointer}.page-btn.active{background:#6b4b12;color:#fff;border-color:#6b4b12}.note{margin-top:28px;padding:14px 16px;border-radius:15px;background:#faf5e8;color:#5d471b;font-size:12px;line-height:1.9}
+@media(max-width:800px){.story-grid{grid-template-columns:1fr}.stories-tools{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><a class="logo" href="index.html"><span class="logo-mark">⌂</span><span><b>روائع إسلامية</b><small>صوتيات إسلامية مميزة</small></span></a><nav><a href="index.html">الرئيسية</a><a href="sunnah.html">السنة النبوية</a><a href="adhkar.html">الأدعية والأذكار</a><a href="sermons.html">الخطب والدروس</a><a href="fatwa.html">الفتاوى</a><a class="active" href="stories.html">القصص</a></nav><div class="head-actions"><button id="theme" class="icon-btn">☾</button></div></header>
+<main class="stories-page">
+<section class="section-hero stories-hero"><div><span>الرئيسية / القصص</span><h1>القصص الصوتية</h1><p>مكتبة صوتية فقط، مرتبة حسب النوع: الأنبياء، الصحابة، أمهات المؤمنين، الصالحين، الطغاة والأمم المهلكة، وقصص القرآن.</p></div></section>
+<div class="story-stats">
+<div class="story-stat"><b id="totalCount">0</b><span>مادة صوتية</span></div>
+<div class="story-stat"><b id="prophetCount">0</b><span>الأنبياء</span></div>
+<div class="story-stat"><b id="companionCount">0</b><span>الصحابة</span></div>
+<div class="story-stat"><b id="mothersCount">0</b><span>أمهات المؤمنين</span></div>
+<div class="story-stat"><b id="righteousCount">0</b><span>الصالحون</span></div>
+<div class="story-stat"><b id="tyrantCount">0</b><span>الطغاة والمهلكون</span></div>
+<div class="story-stat"><b id="quranCount">0</b><span>قصص القرآن</span></div>
+</div>
+<div class="stories-tools"><input id="search" placeholder="ابحث في عنوان القصة أو اسم الراوي أو السلسلة..." autocomplete="off"><select id="sourceFilter"><option value="all">كل السلاسل والمصادر</option></select></div>
+<div class="story-tabs">
+<button class="story-tab active" data-kind="all">الكل</button>
+<button class="story-tab" data-kind="prophets">قصص الأنبياء</button>
+<button class="story-tab" data-kind="companions">قصص الصحابة</button>
+<button class="story-tab" data-kind="mothers">أمهات المؤمنين</button>
+<button class="story-tab" data-kind="righteous">قصص الصالحين</button>
+<button class="story-tab" data-kind="tyrants">الطغاة والأمم المهلكة</button>
+<button class="story-tab" data-kind="quran">قصص القرآن</button>
+</div>
+<section id="library" class="story-grid"></section><div id="pagination" class="pagination"></div>
+<div class="note">هذا القسم صوتي فقط ولا يحتوي على نصوص للقصص. أضيفت المواد الجديدة بروابط MP3 مباشرة من المصادر المذكورة في كل بطاقة. كما يبقى المشغل الواحد المشترك في الموقع هو المسؤول عن منع تشغيل أكثر من مادة في الوقت نفسه.</div>
+</main>
+<footer><b>روائع إسلامية</b><span>القصص — صوت فقط</span></footer>
+<div class="player"><div class="track"><strong>♪</strong><div><small>يتم التشغيل الآن</small><b id="track">اختر مادة للبدء</b></div></div><div class="controls"><button id="pause" class="big">▶</button></div><div class="progress"><span id="line"></span></div><div class="tools" id="time">00:00</div></div>
+<script src="script.js"></script><script src="stories-data.js?v=5"></script>
+<script>
+const data=window.STORIES_LIBRARY||[];
+const count=(c)=>data.filter(x=>x.category===c).length;
+document.getElementById('totalCount').textContent=data.length;
+document.getElementById('prophetCount').textContent=count('قصص الأنبياء');
+document.getElementById('companionCount').textContent=count('قصص الصحابة');
+document.getElementById('mothersCount').textContent=count('قصص أمهات المؤمنين');
+document.getElementById('righteousCount').textContent=count('قصص الصالحين');
+document.getElementById('tyrantCount').textContent=count('قصص الطغاة والأمم المهلكة');
+document.getElementById('quranCount').textContent=count('قصص القرآن');
+let kind='all',page=1,per=20;
+const lib=document.getElementById('library'),pag=document.getElementById('pagination'),search=document.getElementById('search'),sourceFilter=document.getElementById('sourceFilter');
+const sources=[...new Set(data.map(x=>x.source))].sort((a,b)=>a.localeCompare(b,'ar'));
+sourceFilter.insertAdjacentHTML('beforeend',sources.map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join(''));
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function categoryOk(x){return kind==='all'||(kind==='prophets'&&x.category==='قصص الأنبياء')||(kind==='companions'&&x.category==='قصص الصحابة')||(kind==='mothers'&&x.category==='قصص أمهات المؤمنين')||(kind==='righteous'&&x.category==='قصص الصالحين')||(kind==='tyrants'&&x.category==='قصص الطغاة والأمم المهلكة')||(kind==='quran'&&x.category==='قصص القرآن')}
+function filtered(){const q=search.value.trim().toLowerCase(),src=sourceFilter.value;return data.filter(x=>categoryOk(x)&&(src==='all'||x.source===src)&&(!q||(x.title+' '+x.speaker+' '+x.category+' '+x.source).toLowerCase().includes(q)))}
+function render(){const arr=filtered(),pages=Math.max(1,Math.ceil(arr.length/per));if(page>pages)page=pages;const shown=arr.slice((page-1)*per,page*per);lib.innerHTML=shown.map((x,i)=>`<article class="story-card"><h3>${esc(x.title)}</h3><p>${esc(x.speaker)} — ${esc(x.category)} — ${esc(x.source)}</p><audio controls preload="none" data-audio-id="story-${esc(x.id)}" src="${esc(x.audio)}"></audio><a class="source-link" href="${esc(x.sourceUrl)}" target="_blank" rel="noopener">المصدر</a></article>`).join('')||'<div class="empty-note">لا توجد مواد مطابقة.</div>';pag.innerHTML=Array.from({length:pages},(_,i)=>`<button class="page-btn ${i+1===page?'active':''}" data-page="${i+1}">${i+1}</button>`).join('')}
+search.addEventListener('input',()=>{page=1;render()});sourceFilter.addEventListener('change',()=>{page=1;render()});document.querySelectorAll('.story-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.story-tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');kind=b.dataset.kind;page=1;render()}));pag.addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b){page=+b.dataset.page;render();window.scrollTo({top:document.querySelector('.stories-page').offsetTop-70,behavior:'smooth'})}});render();
+</script>
+</body></html>

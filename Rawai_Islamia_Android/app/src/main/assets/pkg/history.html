@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>روائع إسلامية | التاريخ الإسلامي</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.history-page{max-width:1200px;margin:0 auto;padding:0 5% 110px}.history-hero{margin-top:28px}.history-tools{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:12px;margin:26px 0}.history-tools input,.history-tools select{width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card,#fff);color:inherit}.history-stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.history-stat{background:var(--card,#fff);border:1px solid var(--line);border-radius:14px;padding:10px 14px;min-width:112px}.history-stat b{display:block;font-size:20px}.history-stat span{font-size:12px}.history-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.history-card{background:var(--card,#fff);border:1px solid var(--line);border-radius:18px;padding:16px}.history-card h3{margin:0 0 7px;font-size:17px;line-height:1.6}.history-card p{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.8}.history-card audio{width:100%;display:block;min-height:42px}.source-link{display:inline-block;margin-top:9px;color:#6b4b12;font-size:11px;font-weight:700;text-decoration:none}.pagination{display:flex;gap:6px;flex-wrap:wrap;margin:24px 0}.page-btn{border:1px solid var(--line);background:var(--card,#fff);border-radius:10px;padding:8px 12px;cursor:pointer}.page-btn.active{background:#6b4b12;color:#fff;border-color:#6b4b12}.note{margin-top:28px;padding:14px 16px;border-radius:15px;background:#faf5e8;color:#5d471b;font-size:12px;line-height:1.9}@media(max-width:800px){.history-grid{grid-template-columns:1fr}.history-tools{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><a class="logo" href="index.html"><span class="logo-mark">⌂</span><span><b>روائع إسلامية</b><small>صوتيات إسلامية مميزة</small></span></a><nav><a href="index.html">الرئيسية</a><a href="sunnah.html">السنة النبوية</a><a href="adhkar.html">الأدعية والأذكار</a><a href="sermons.html">الخطب والدروس</a><a href="fatwa.html">الفتاوى</a><a class="active" href="stories.html">القصص</a></nav><div class="head-actions"><button id="theme" class="icon-btn">☾</button></div></header>
+<main class="history-page">
+<section class="section-hero stories-hero"><div><span>الرئيسية / التاريخ الإسلامي</span><h1>التاريخ الإسلامي</h1><p>مكتبة صوتية مستقلة للتاريخ الإسلامي، تضم محطات وأحداثًا وشخصيات من تاريخ الأمة.</p></div></section>
+<div class="history-stats"><div class="history-stat"><b id="totalCount">0</b><span>مادة تاريخية</span></div><div class="history-stat"><b id="seriesCount">0</b><span>سلاسل تاريخية</span></div></div>
+<div class="history-tools"><input id="search" placeholder="ابحث في عنوان الحلقة أو اسم الراوي أو السلسلة..." autocomplete="off"><select id="sourceFilter"><option value="all">كل السلاسل والمصادر</option></select></div>
+<section id="library" class="history-grid"></section><div id="pagination" class="pagination"></div>
+<div class="note">هذا القسم مخصص للتاريخ الإسلامي فقط. لا تظهر هنا تصنيفات قصص الأنبياء أو الصحابة أو أمهات المؤمنين أو الصالحين أو قصص القرآن. كل مادة مرتبطة بمصدرها الأصلي.</div>
+</main>
+<footer><b>روائع إسلامية</b><span>التاريخ الإسلامي — صوت فقط</span></footer>
+<div class="player"><div class="track"><strong>♪</strong><div><small>يتم التشغيل الآن</small><b id="track">اختر مادة للبدء</b></div></div><div class="controls"><button id="pause" class="big">▶</button></div><div class="progress"><span id="line"></span></div><div class="tools" id="time">00:00</div></div>
+<script src="script.js"></script><script src="stories-data.js?v=6"></script>
+<script>
+const data=(window.STORIES_LIBRARY||[]).filter(x=>x.category==='التاريخ الإسلامي');
+const lib=document.getElementById('library'),pag=document.getElementById('pagination'),search=document.getElementById('search'),sourceFilter=document.getElementById('sourceFilter');
+document.getElementById('totalCount').textContent=data.length;
+document.getElementById('seriesCount').textContent=new Set(data.map(x=>x.source)).size;
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const sources=[...new Set(data.map(x=>x.source))].sort((a,b)=>a.localeCompare(b,'ar'));
+sourceFilter.insertAdjacentHTML('beforeend',sources.map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join(''));
+let page=1,per=20;
+function filtered(){const q=search.value.trim().toLowerCase(),src=sourceFilter.value;return data.filter(x=>(src==='all'||x.source===src)&&(!q||(x.title+' '+x.speaker+' '+x.source).toLowerCase().includes(q)))}
+function render(){const arr=filtered(),pages=Math.max(1,Math.ceil(arr.length/per));if(page>pages)page=pages;const shown=arr.slice((page-1)*per,page*per);lib.innerHTML=shown.map(x=>`<article class="history-card"><h3>${esc(x.title)}</h3><p>${esc(x.speaker)} — ${esc(x.source)}</p><audio controls preload="none" data-audio-id="history-${esc(x.id)}" src="${esc(x.audio)}"></audio><a class="source-link" href="${esc(x.sourceUrl)}" target="_blank" rel="noopener">المصدر</a></article>`).join('')||'<div class="empty-note">لا توجد مواد مطابقة.</div>';pag.innerHTML=Array.from({length:pages},(_,i)=>`<button class="page-btn ${i+1===page?'active':''}" data-page="${i+1}">${i+1}</button>`).join('')}
+search.addEventListener('input',()=>{page=1;render()});sourceFilter.addEventListener('change',()=>{page=1;render()});pag.addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b){page=+b.dataset.page;render();window.scrollTo({top:document.querySelector('.history-page').offsetTop-70,behavior:'smooth'})}});render();
+</script>
+</body></html>

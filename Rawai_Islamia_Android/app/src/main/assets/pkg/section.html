@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>روائع إسلامية | القرآن الكريم</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><a class="logo" href="index.html"><span class="logo-mark">⌂</span><span><b>روائع إسلامية</b><small>صوتيات إسلامية مميزة</small></span></a><nav><a href="index.html">الرئيسية</a><a class="active" href="#content">القرآن الكريم</a></nav><div class="head-actions"><button id="theme" class="icon-btn">☾</button></div></header>
+<main>
+<section class="section-hero quran-hero"><div><span>الرئيسية / القرآن الكريم</span><h1>القرآن الكريم</h1><p>سور القرآن الكريم مرتبة حسب المصحف، مع تلاوة صوتية لكل سورة.</p></div></section>
+<section id="content" class="section quran-section">
+<div class="quran-top"><div><small>مكتبة القرّاء</small><h2>القرآن الكريم</h2><p>اختر القارئ أولاً، ثم اختر السورة. نعرض جميع المصاحف المتاحة من المصدر، والقرّاء الذين لا يملكون المصحف كاملاً يظهرون في «قرآن كريم منوع».</p></div><div class="quran-stats"><b id="reciterCount">—</b><span>قارئ متاح</span></div></div>
+
+<div class="quran-tabs">
+<button class="qtab active" data-tab="complete">المصحف الكامل</button>
+<button class="qtab" data-tab="mixed">قرآن كريم منوع</button>
+</div>
+
+<div id="completePanel">
+<div class="reciter-box">
+<div class="reciter-label"><span>🎙️</span><div><b>اختر القارئ</b><small>يظهر هنا القرّاء الذين لديهم سور القرآن كاملة</small></div></div>
+<select id="reciterSelect"><option>جارٍ تحميل القرّاء...</option></select>
+</div>
+<div class="quran-tools"><label class="quran-search">⌕<input id="quranSearch" placeholder="ابحث داخل القرآن الكريم: اسم السورة أو القارئ..." autocomplete="off"></label><div class="quran-filters"><button class="qfilter active" data-kind="all">كل السور</button><button class="qfilter" data-kind="مكية">مكية</button><button class="qfilter" data-kind="مدنية">مدنية</button></div></div><div id="quranSearchResults" class="quran-search-results" hidden></div>
+<div id="selectedReciter" class="selected-reciter">القارئ: —</div>
+<div id="list" class="quran-grid"></div><div id="pagination" class="pagination"></div>
+</div>
+
+<div id="mixedPanel" class="mixed-panel" hidden>
+<div class="mixed-intro"><div><span>🎧</span><div><h3>قرآن كريم منوع</h3><p>هنا جميع المصاحف التي لا تحتوي على 114 سورة كاملة. اختر القارئ ثم استمع إلى السور المتاحة لديه فقط، بدون عرض سور غير موجودة.</p></div></div><span class="local-search-note">هذا البحث تابع للقرآن الكريم فقط</span></div>
+<div id="mixedList" class="mixed-list"><div class="loading">جارٍ تحميل القائمة...</div></div>
+</div>
+</section></main>
+<footer><b>روائع إسلامية</b><span>القرآن الكريم — السور والتلاوات</span></footer>
+<div class="player"><div class="track"><strong>♪</strong><div><small>يتم التشغيل الآن</small><b id="track">اختر سورة للبدء</b></div></div><div class="controls"><button id="pause" class="big">▶</button></div><div class="progress"><span id="line"></span></div><div class="tools" id="time">00:00</div></div>
+<script src="script.js"></script>
+<script>
+const surahs=[
+['الفاتحة',7,'مكية'],['البقرة',286,'مدنية'],['آل عمران',200,'مدنية'],['النساء',176,'مدنية'],['المائدة',120,'مدنية'],['الأنعام',165,'مكية'],['الأعراف',206,'مكية'],['الأنفال',75,'مدنية'],['التوبة',129,'مدنية'],['يونس',109,'مكية'],['هود',123,'مكية'],['يوسف',111,'مكية'],['الرعد',43,'مدنية'],['إبراهيم',52,'مكية'],['الحجر',99,'مكية'],['النحل',128,'مكية'],['الإسراء',111,'مكية'],['الكهف',110,'مكية'],['مريم',98,'مكية'],['طه',135,'مكية'],['الأنبياء',112,'مكية'],['الحج',78,'مدنية'],['المؤمنون',118,'مكية'],['النور',64,'مدنية'],['الفرقان',77,'مكية'],['الشعراء',227,'مكية'],['النمل',93,'مكية'],['القصص',88,'مكية'],['العنكبوت',69,'مكية'],['الروم',60,'مكية'],['لقمان',34,'مكية'],['السجدة',30,'مكية'],['الأحزاب',73,'مدنية'],['سبأ',54,'مكية'],['فاطر',45,'مكية'],['يس',83,'مكية'],['الصافات',182,'مكية'],['ص',88,'مكية'],['الزمر',75,'مكية'],['غافر',85,'مكية'],['فصلت',54,'مكية'],['الشورى',53,'مكية'],['الزخرف',89,'مكية'],['الدخان',59,'مكية'],['الجاثية',37,'مكية'],['الأحقاف',35,'مكية'],['محمد',38,'مدنية'],['الفتح',29,'مدنية'],['الحجرات',18,'مدنية'],['ق',45,'مكية'],['الذاريات',60,'مكية'],['الطور',49,'مكية'],['النجم',62,'مكية'],['القمر',55,'مكية'],['الرحمن',78,'مدنية'],['الواقعة',96,'مكية'],['الحديد',29,'مدنية'],['المجادلة',22,'مدنية'],['الحشر',24,'مدنية'],['الممتحنة',13,'مدنية'],['الصف',14,'مدنية'],['الجمعة',11,'مدنية'],['المنافقون',11,'مدنية'],['التغابن',18,'مدنية'],['الطلاق',12,'مدنية'],['التحريم',12,'مدنية'],['الملك',30,'مكية'],['القلم',52,'مكية'],['الحاقة',52,'مكية'],['المعارج',44,'مكية'],['نوح',28,'مكية'],['الجن',28,'مكية'],['المزمل',20,'مكية'],['المدثر',56,'مكية'],['القيامة',40,'مكية'],['الإنسان',31,'مدنية'],['المرسلات',50,'مكية'],['النبأ',40,'مكية'],['النازعات',46,'مكية'],['عبس',42,'مكية'],['التكوير',29,'مكية'],['الانفطار',19,'مكية'],['المطففين',36,'مكية'],['الانشقاق',25,'مكية'],['البروج',22,'مكية'],['الطارق',17,'مكية'],['الأعلى',19,'مكية'],['الغاشية',26,'مكية'],['الفجر',30,'مكية'],['البلد',20,'مكية'],['الشمس',15,'مكية'],['الليل',21,'مكية'],['الضحى',11,'مكية'],['الشرح',8,'مكية'],['التين',8,'مكية'],['العلق',19,'مكية'],['القدر',5,'مكية'],['البينة',8,'مدنية'],['الزلزلة',8,'مدنية'],['العاديات',11,'مكية'],['القارعة',11,'مكية'],['التكاثر',8,'مكية'],['العصر',3,'مكية'],['الهمزة',9,'مكية'],['الفيل',5,'مكية'],['قريش',4,'مكية'],['الماعون',7,'مكية'],['الكوثر',3,'مكية'],['الكافرون',6,'مكية'],['النصر',3,'مدنية'],['المسد',5,'مكية'],['الإخلاص',4,'مكية'],['الفلق',5,'مكية'],['الناس',6,'مكية']
+];
+
+let kind='all',page=1,perPage=15,mixedPage=1,mixedPerPage=24,completeReciters=[],mixedReciters=[];
+const list=document.getElementById('list'),pagination=document.getElementById('pagination'),filter=document.getElementById('quranSearch'),select=document.getElementById('reciterSelect');
+const audioUrl=(r,s)=>`${r.server}${String(s).padStart(3,'0')}.mp3`;
+const norm=v=>String(v??'').trim().toLowerCase().replace(/[ًٌٍَُِّْـ]/g,'').replace(/أ|إ|آ/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/\s+/g,' ');
+const escapeHtml=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function currentReciter(){return completeReciters.find(r=>String(r.moshafId)===select.value)||completeReciters[0];}
+function searchMatches(term){
+  if(!term) return {complete:completeReciters,mixed:mixedReciters,surahs:surahs.map((s,i)=>({s,i}))};
+  const complete=completeReciters.filter(r=>norm(r.name).includes(term)||norm(r.moshafName).includes(term));
+  const mixed=mixedReciters.filter(r=>norm(r.name).includes(term)||norm(r.moshafName).includes(term)||r.surahs.some(n=>norm(surahs[n-1]?.[0]).includes(term)));
+  const matchedSurahs=surahs.map((s,i)=>({s,i})).filter(x=>norm(x.s[0]).includes(term));
+  return {complete,mixed,surahs:matchedSurahs};
+}
+function data(){
+  const term=norm(filter.value),r=currentReciter();
+  return surahs.map((s,i)=>({s,i})).filter(x=>(kind==='all'||x.s[2]===kind)&&(!term||norm(x.s[0]).includes(term)));
+}
+function renderSearchSummary(){
+  const box=document.getElementById('quranSearchResults'); if(!box)return;
+  const term=norm(filter.value); if(!term){box.innerHTML='';box.hidden=true;return;}
+  const m=searchMatches(term);
+  const total=m.complete.length+m.mixed.length+m.surahs.length;
+  box.hidden=false;
+  box.innerHTML=`<div class="search-summary"><strong>نتائج البحث داخل القرآن الكريم فقط</strong><span>${total} نتيجة</span></div>
+    ${m.complete.length?`<div class="search-group"><h4>📖 مصاحف كاملة</h4>${m.complete.slice(0,8).map(r=>`<button class="search-result reciter-result" data-reciter="${r.moshafId}">🎙️ ${escapeHtml(r.name)} <small>${escapeHtml(r.moshafName||'المصحف الكامل')}</small></button>`).join('')}</div>`:''}
+    ${m.mixed.length?`<div class="search-group"><h4>🎧 قرآن كريم منوع</h4>${m.mixed.slice(0,8).map(r=>`<button class="search-result mixed-result" data-mixed-search="${r.moshafId}">🎙️ ${escapeHtml(r.name)} <small>${r.surahs.length} سورة</small></button>`).join('')}</div>`:''}
+    ${m.surahs.length?`<div class="search-group"><h4>🕋 السور المطابقة</h4><div class="search-surahs">${m.surahs.slice(0,20).map(x=>`<button class="search-result surah-result" data-surah-index="${x.i}">سورة ${escapeHtml(x.s[0])} <small>${x.s[2]} • ${x.s[1]} آية</small></button>`).join('')}</div></div>`:''}
+    ${!total?'<div class="empty-note">لا توجد نتائج مطابقة داخل القرآن الكريم.</div>':''}`;
+}
+function render(){
+  const r=currentReciter(),items=data(),pages=Math.max(1,Math.ceil(items.length/perPage));if(page>pages)page=pages;
+  const shown=items.slice((page-1)*perPage,page*perPage);
+  document.getElementById('selectedReciter').textContent='القارئ: '+(r?.name||'—')+(r?.moshafName?' — '+r.moshafName:'');
+  list.innerHTML=shown.map(({s,i})=>`<article class="quran-card"><div class="surah-number">${i+1}</div><div class="surah-info"><h3>سورة ${s[0]}</h3><p>${s[2]} • ${s[1]} آية</p></div><button class="play qplay" data-audio="${r?audioUrl(r,i+1):''}" data-track="سورة ${s[0]} — ${escapeHtml(r?.name||'')}" aria-label="تشغيل سورة ${s[0]}">▶</button></article>`).join('')||'<div class="empty-note">لا توجد سورة بهذا الاسم.</div>';
+  pagination.innerHTML=Array.from({length:pages},(_,i)=>`<button class="page ${i+1===page?'active':''}" data-page="${i+1}">${i+1}</button>`).join('');
+  renderSearchSummary();
+}
+function mixedFiltered(){
+ const term=norm(filter.value); if(!term)return mixedReciters;
+ return mixedReciters.filter(r=>norm(r.name).includes(term)||norm(r.moshafName).includes(term)||r.surahs.some(n=>norm(surahs[n-1]?.[0]).includes(term)));
+}
+function renderMixed(){const arr=mixedFiltered(),pages=Math.max(1,Math.ceil(arr.length/mixedPerPage));if(mixedPage>pages)mixedPage=pages;const shown=arr.slice((mixedPage-1)*mixedPerPage,mixedPage*mixedPerPage);const box=document.getElementById('mixedList');box.innerHTML=shown.map(r=>`<article class="mixed-card"><div class="mixed-avatar">🎙️</div><div class="mixed-info"><h3>${escapeHtml(r.name)}</h3><p>${r.surahs.length} سورة متاحة${r.moshafName?' • '+escapeHtml(r.moshafName):''}</p></div><button class="mixed-open" data-moshaf="${r.moshafId}">عرض السور</button></article>`).join('')||'<div class="empty-note">لا يوجد قارئ مطابق.</div>';document.getElementById('mixedPagination')?.remove();const nav=document.createElement('div');nav.id='mixedPagination';nav.className='pagination';nav.innerHTML=Array.from({length:pages},(_,i)=>`<button class="page ${i+1===mixedPage?'active':''}" data-mixed-page="${i+1}">${i+1}</button>`).join('');box.after(nav)}
+
+async function loadReciters(){
+  try{
+    const res=await fetch('https://mp3quran.net/api/v3/reciters?language=ar',{cache:'no-store'});
+    if(!res.ok)throw new Error('API '+res.status);
+    const payload=await res.json(),all=[];
+    const reciters=Array.isArray(payload)?payload:(Array.isArray(payload.reciters)?payload.reciters:[]);
+    reciters.forEach(x=>(x.moshaf||[]).forEach(m=>{
+      const rawList=Array.isArray(m.surah_list)?m.surah_list:(m.surah_list||'').split(',');
+      const surahList=rawList.map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=114);
+      if(surahList.length && m.server)all.push({id:x.id,name:x.name,moshafId:m.id,server:m.server,surahs:[...new Set(surahList)],moshafName:m.name||'المصحف'});
+    }));
+    // نعرض جميع المصاحف المتاحة من المصدر بدون حد 400.
+    completeReciters=all.filter(r=>r.surahs.length===114);
+    mixedReciters=all.filter(r=>r.surahs.length<114);
+    document.getElementById('reciterCount').textContent=completeReciters.length+mixedReciters.length;
+    select.innerHTML=completeReciters.map(r=>`<option value="${r.moshafId}">${escapeHtml(r.name)} — ${escapeHtml(r.moshafName||'المصحف')}</option>`).join('')||'<option>لا توجد بيانات</option>';
+    render();renderMixed();
+  }catch(e){console.error('Reciters load error:',e);select.innerHTML='<option>تعذر تحميل قائمة القرّاء</option>';document.getElementById('reciterCount').textContent='—';document.getElementById('mixedList').innerHTML='<div class="empty-note">تعذر تحميل قائمة القرّاء الآن. حاول تحديث الصفحة.</div>'}
+}
+select.addEventListener('change',()=>{page=1;render()});
+filter.addEventListener('input',()=>{
+  const term=norm(filter.value);
+  if(term){
+    const first=completeReciters.find(r=>norm(r.name).includes(term)||norm(r.moshafName).includes(term));
+    if(first) select.value=String(first.moshafId);
+    const firstSurah=surahs.findIndex(s=>norm(s[0]).includes(term));
+    if(firstSurah>=0 && !first) { /* show matching surah with current reciter */ }
+  }
+  page=1;mixedPage=1;render();renderMixed();
+});
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-reciter]');
+  if(b){select.value=String(b.dataset.reciter);page=1;render();return;}
+  const m=e.target.closest('[data-mixed-search]');
+  if(m){document.querySelectorAll('.qtab').forEach(x=>x.classList.remove('active'));document.querySelector('.qtab[data-tab="mixed"]')?.classList.add('active');document.getElementById('completePanel').hidden=true;document.getElementById('mixedPanel').hidden=false;renderMixed();const card=[...document.querySelectorAll('[data-moshaf]')].find(x=>x.dataset.moshaf===m.dataset.mixedSearch);card?.click();return;}
+  const sr=e.target.closest('[data-surah-index]');
+  if(sr){select.value=String(currentReciter()?.moshafId||'');filter.value=surahs[+sr.dataset.surahIndex][0];page=1;render();return;}
+});
+document.querySelectorAll('.qfilter').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.qfilter').forEach(x=>x.classList.remove('active'));b.classList.add('active');kind=b.dataset.kind;page=1;render()}));
+pagination.addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b){page=+b.dataset.page;render();window.scrollTo({top:document.querySelector('.quran-section').offsetTop-70,behavior:'smooth'})}});
+
+document.addEventListener('click',e=>{const b=e.target.closest('[data-mixed-page]');if(b){mixedPage=+b.dataset.mixedPage;renderMixed();window.scrollTo({top:document.querySelector('.mixed-panel').offsetTop-70,behavior:'smooth'})}});
+document.querySelectorAll('.qtab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.qtab').forEach(x=>x.classList.remove('active'));b.classList.add('active');const mixed=b.dataset.tab==='mixed';document.getElementById('completePanel').hidden=mixed;document.getElementById('mixedPanel').hidden=!mixed}));
+document.getElementById('mixedList').addEventListener('click',e=>{const b=e.target.closest('[data-moshaf]');if(!b)return;const r=mixedReciters.find(x=>String(x.moshafId)===b.dataset.moshaf);if(!r)return;const panel=b.closest('.mixed-card'),old=panel.nextElementSibling;if(old?.classList.contains('mixed-surahs')){old.remove();return}const el=document.createElement('div');el.className='mixed-surahs';el.innerHTML=r.surahs.map(n=>`<button class="play mixed-surah" data-audio="${audioUrl(r,n)}" data-track="سورة ${escapeHtml(surahs[n-1]?.[0]||n)} — ${escapeHtml(r.name)}">${escapeHtml(surahs[n-1]?.[0]||'سورة '+n)} <span>▶</span></button>`).join('');panel.after(el)});
+loadReciters();
+</script></body>

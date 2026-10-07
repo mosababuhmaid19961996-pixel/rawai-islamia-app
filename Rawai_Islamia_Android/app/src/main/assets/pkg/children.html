@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>روائع إسلامية | القصص الصوتية للأطفال</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.children-page{max-width:1100px;margin:0 auto;padding:0 5% 110px}.children-hero{margin-top:28px}.audio-tools{margin:20px 0}.audio-tools input{width:100%;box-sizing:border-box;padding:12px 15px;border-radius:12px;border:1px solid var(--line);background:var(--card,#fff);color:inherit}.audio-stats{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 18px}.audio-stat{background:var(--card,#fff);border:1px solid var(--line);border-radius:12px;padding:8px 12px}.audio-stat b{font-size:18px}.audio-list{display:flex;flex-direction:column;gap:8px}.audio-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,380px);align-items:center;gap:12px;padding:10px 12px;background:var(--card,#fff);border:1px solid var(--line);border-radius:10px}.audio-row h3{margin:0;font-size:15px;line-height:1.5}.audio-row small{display:block;margin-top:2px;color:var(--muted);font-size:11px}.audio-row audio{width:100%;height:38px}.section-label{margin:24px 0 8px;font-size:18px}.source-note{margin-top:18px;font-size:11px;color:var(--muted);line-height:1.7}@media(max-width:700px){.audio-row{grid-template-columns:1fr}.audio-row audio{height:40px}}
+</style>
+</head>
+<body>
+<header><a class="logo" href="index.html"><span class="logo-mark">⌂</span><span><b>روائع إسلامية</b><small>قصص إسلامية للأطفال</small></span></a><nav><a href="index.html">الرئيسية</a><a href="sunnah.html">السنة النبوية</a><a href="adhkar.html">الأدعية والأذكار</a><a href="sermons.html">الخطب والدروس</a><a href="fatwa.html">الفتاوى</a><a class="active" href="children.html">قصص الأطفال</a></nav><div class="head-actions"><button id="theme" class="icon-btn">☾</button></div></header>
+<main class="children-page">
+<section class="section-hero children-hero"><div><span>الرئيسية / قصص الأطفال</span><h1>قصص صوتية للأطفال</h1><p>قصص حقيقية من مصادر منشورة على الإنترنت، مع تشغيل الصوت مباشرة داخل الموقع.</p></div></section>
+<div class="audio-stats"><div class="audio-stat"><b id="total">33</b> قصة صوتية</div></div>
+<div class="audio-tools"><input id="search" placeholder="ابحث عن قصة..." autocomplete="off"></div>
+<h2 class="section-label">قصص الأنبياء للأطفال — صوت فقط</h2>
+<section id="prophets" class="audio-list"></section>
+<h2 class="section-label">قصص صوتية أخرى للأطفال</h2>
+<section id="general" class="audio-list"></section>
+<div class="source-note">تشغيل مباشر من ملفات صوتية منشورة على مواقع المصادر الأصلية.</div>
+</main><footer><b>روائع إسلامية</b><span>قصص صوتية للأطفال</span></footer><script src="script.js"></script>
+<script>
+const data=[
+ {title:'قصة سيدنا آدم عليه السلام للأطفال',source:'شبكة الشفاء الإسلامية',audio:'https://www.ashefaa.com/enshad/files/A6fal/Adam.mp3'},
+ {title:'قصة سيدنا يوسف عليه السلام للأطفال',source:'شبكة الشفاء الإسلامية',audio:'https://www.ashefaa.com/enshad/files/A6fal/Yousouf.mp3'},
+ {title:'قصة سيدنا محمد صلى الله عليه وسلم للأطفال',source:'شبكة الشفاء الإسلامية',audio:'https://www.ashefaa.com/enshad/files/A6fal/Mohamed.mp3'},
+ {title:'الفأر والتفاحة',source:'مكتبة الفانوس',audio:'https://www.al-fanoos.org/wp-content/uploads/2023/07/الفأر-والتفاحة-1.mp3'},
+ {title:'من رأسي إلى إصبع قدمي',source:'مكتبة الفانوس',audio:'https://www.al-fanoos.org/wp-content/uploads/2023/07/من-رأسي-الى-اصبع-قدمي-1-1.mp3'},
+ {title:'مقعد الصداقة',source:'مكتبة الفانوس',audio:'https://www.al-fanoos.org/wp-content/uploads/2023/06/مقعد-الصداقة-1-1.mp3'},
+ {title:'لا شيء في الهدية',source:'مكتبة الفانوس',audio:'https://www.al-fanoos.org/wp-content/uploads/2023/07/لا-شيء-في-الهدية-1-1.mp3'},
+ {title:'البوم الصغير ووشاحه البرتقالي',source:'مكتبة الفانوس',audio:'https://www.al-fanoos.org/wp-content/uploads/2023/07/البوم-الصغير-1-1.mp3'},
+ {title:'عندما غمرت المياه المدينة',source:'مكتبة الفانوس',audio:'https://www.al-fanoos.org/wp-content/uploads/2023/06/عندما-غمرت-المياه-المدينة-1.mp3'},
+ {title:'يا طير الطاير',source:'مكتبة الفانوس',audio:'https://www.al-fanoos.org/wp-content/uploads/2023/06/يا-طير-الطاير-.mp3'},
+ {title:'هيا نلعب بالنقاط',source:'مكتبة الفانوس',audio:'https://www.al-fanoos.org/wp-content/uploads/2023/06/هيا-نلعب-بالنقاط-بانتظار-موافقة-الناشر.mp3'},
+ {title:'تنين قوس الألوان',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/06/٢٥-مارس-١١.٠٥-ص_-online-audio-converter.com_.mp3'},
+ {title:'الغوص',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/06/2023_04_16_18_36_38.mp3'},
+ {title:'ليس الآن!',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2026/05/قصة-ليس-الان-1.mp3'},
+ {title:'الفراشة البيضاء',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/06/2023_04_03_21_32_30.mp3'},
+ {title:'التعليم حق للجميع',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/07/التعليم-حق-الجميع-online-audio-converter.com_.mp3'},
+ {title:'ثق بي، أنا أرنب',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/06/2023_04_03_21_23_34.mp3'},
+ {title:'أين أمي؟',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/06/2023_03_01_21_30_50.mp3'},
+ {title:'حلم في سماء القرية',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2026/05/قصة-حلم-في-سماء-القرية-1.mp3'},
+ {title:'إلى أين هم ذاهبون؟',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/06/إلى-أين-هم-ذاهبون-online-audio-converter.com_.mp3'},
+ {title:'يوم في الكرنفال',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/06/2023_04_16_18_44_10-1.mp3'},
+ {title:'الآمر الناهي الصغير',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/07/trimtrimالآمر-الناهي-online-audio-converter.com_.mp3'},
+ {title:'قطزول المضياف',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/07/قطزول-المضياف-online-audio-converter.com_.mp3'},
+ {title:'سلّة سلمى',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/06/سلة-سلمى-كامل.mp3'},
+ {title:'العنزة والكلب والبقرة',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/06/قصة.mp3'},
+ {title:'الألوان السبعة لقوس قزح',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/07/2023_07_23_19_41_51.mp3'},
+ {title:'قطة هبة',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/07/قطة-هبه.mp3'},
+ {title:'سيلين تصنع سيارة',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/06/سيلين-تصنع-سيارة.mp3'},
+ {title:'الدوب دوب الثلاثة',source:'نوري',audio:'https://noorybooks.com/blog/wp-content/uploads/2026/06/نوري-مصور-الدوب-دوب-الثلاثة-كاملة-2.mp3'},
+ {title:'طحنونة والهوى',source:'شبكة المرأة السورية',audio:'https://swnsyria.org/wp-content/uploads/2023/04/TAHNOUNA-WA-ALHAWA-.mp3'},
+ {title:'تيتا نحلة والعيد',source:'شبكة المرأة السورية',audio:'https://swnsyria.org/wp-content/uploads/2023/04/TITA-NAHLYY-1.mp3'},
+ {title:'الذئب الحارس',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/03/الذئب-الحارس.mp3'},
+ {title:'حكاية سبعة ألوان قوس قزح',source:'Kidzooon',audio:'https://kidzooon.com/wp-content/uploads/2023/07/2023_07_23_19_41_51.mp3'}
+];
+const prophets=[
+ {title:'سيرة آدم عليه السلام للأطفال',source:'شبكة الشفاء الإسلامية',audio:'https://www.ashefaa.com/enshad/files/A6fal/Adam.mp3'},
+ {title:'قصة يوسف عليه السلام للأطفال',source:'شبكة الشفاء الإسلامية',audio:'https://www.ashefaa.com/enshad/files/A6fal/Yousouf.mp3'},
+ {title:'قصة سيدنا محمد صلى الله عليه وسلم للأطفال',source:'شبكة الشفاء الإسلامية',audio:'https://www.ashefaa.com/enshad/files/A6fal/Mohamed.mp3'}
+];
+const search=document.getElementById('search'), general=document.getElementById('general'), prophetsEl=document.getElementById('prophets');
+const uniqueData=Array.from(new Map(data.map(x=>[x.audio,x])).values());
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function row(x){return `<div class="audio-row"><h3>▶ ${esc(x.title)}</h3><audio controls preload="none" src="${esc(x.audio)}"></audio></div>`}
+function render(){const q=search.value.trim().toLowerCase();const parr=prophets.filter(x=>(x.title+' '+x.source).toLowerCase().includes(q));const arr=uniqueData.filter(x=>(x.title+' '+x.source).toLowerCase().includes(q));prophetsEl.innerHTML=parr.map(row).join('')||'<div>لا توجد نتائج.</div>';general.innerHTML=arr.filter(x=>!prophets.some(p=>p.audio===x.audio)).map(row).join('')||'<div>لا توجد نتائج.</div>';document.getElementById('total').textContent=parr.length+arr.filter(x=>!prophets.some(p=>p.audio===x.audio)).length}
+search.addEventListener('input',render);render();
+</script>
+</body></html>

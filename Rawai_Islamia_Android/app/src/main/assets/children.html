@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>روائع إسلامية | القصص الصوتية للأطفال</title>
+<link rel="stylesheet" href="style.css">
+<style>
+:root{--line:#eadfca;--muted:#766f63;--card:#fffdf8}.children-page{max-width:980px;margin:0 auto;padding:0 5% 100px}.children-hero{margin-top:28px}.audio-tools{margin:22px 0}.audio-tools input{width:100%;box-sizing:border-box;padding:13px 15px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:inherit}.audio-stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 22px}.audio-stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 13px}.audio-stat b{font-size:19px;margin-left:5px}.audio-stat span{font-size:12px;color:var(--muted)}.audio-grid{display:flex;flex-direction:column;gap:8px}.audio-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}.audio-card h3{margin:0 0 6px;font-size:16px;line-height:1.5}.audio-card p{display:none}.audio-card audio{width:100%;height:42px;margin:0}.audio-card .audio-actions{display:flex;align-items:center;gap:8px;margin-top:8px}.audio-card .download-btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid var(--line);background:#fff7df;color:#5f4b20;border-radius:10px;padding:8px 12px;font-size:14px;font-weight:700;cursor:pointer}.audio-card .download-btn:hover{filter:brightness(.97)}.audio-card a.source-link,.player-label,.source-note{display:none}@media(max-width:600px){.audio-card{padding:9px}.audio-card h3{font-size:15px}}
+</style>
+</head>
+<body>
+<header><a class="logo" href="index.html"><span class="logo-mark">⌂</span><span><b>روائع إسلامية</b><small>قصص إسلامية للأطفال</small></span></a><nav><a href="index.html">الرئيسية</a><a href="sunnah.html">السنة النبوية</a><a href="adhkar.html">الأدعية والأذكار</a><a href="sermons.html">الخطب والدروس</a><a href="fatwa.html">الفتاوى</a><a class="active" href="children.html">قصص الأطفال</a></nav><div class="head-actions"><button id="theme" class="icon-btn">☾</button></div></header>
+<main class="children-page">
+<section class="section-hero children-hero"><div><span>الرئيسية / قصص الأطفال</span><h1>قصص صوتية للأطفال</h1><p>قصص حقيقية من مصادر منشورة على الإنترنت، مع تشغيل الصوت مباشرة داخل الموقع.</p></div></section>
+<div class="audio-stats"><div class="audio-stat"><b id="total">0</b><span>قصة صوتية للأطفال</span></div><div class="audio-stat"><b id="directTotal">0</b><span>ملف صوتي مباشر</span></div></div>
+<div class="audio-tools"><input id="search" placeholder="ابحث عن قصة..." autocomplete="off"></div>
+<h2 class="section-label">قصص الأطفال الصوتية — صوت فقط</h2>
+<section id="library" class="audio-grid"></section>
+<div class="source-note">تشغيل مباشر من ملفات صوتية منشورة على مواقع المصادر الأصلية.</div>
+</main><footer><b>روائع إسلامية</b><span>قصص صوتية للأطفال</span></footer><script src="script.js"></script>
+<script>
+const data=[
+ {title:'قصة سيدنا آدم عليه السلام للأطفال',url:'https://www.ashefaa.com/enshad/files/A6fal/Adam.mp3',sourceUrl:'https://www.ashefaa.com/play-27885.html'},
+ {title:'قصة سيدنا يوسف عليه السلام للأطفال',url:'https://www.ashefaa.com/enshad/files/A6fal/Yousouf.mp3',sourceUrl:'https://www.ashefaa.com/play-27882.html'},
+ {title:'قصة سيدنا محمد صلى الله عليه وسلم للأطفال',url:'https://www.ashefaa.com/enshad/files/A6fal/Mohamed.mp3',sourceUrl:'https://www.ashefaa.com/play-27883.html'},
+ {title:'سيرة سيدنا نوح عليه السلام للأطفال',url:'https://www.ashefaa.com/enshad/files/A6fal/Nooh.mp3',sourceUrl:'https://www.ashefaa.com/play-27884.html'},
+ {title:'العنزة والكلب والبقرة — قصة مترجمة للأطفال',url:'https://kidzooon.com/wp-content/uploads/2023/06/قصة.mp3',sourceUrl:'https://kidzooon.com/%D8%A7%D9%84%D8%B9%D9%86%D8%B2%D8%A9-%D9%88%D8%A7%D9%84%D9%83%D9%84%D8%A8-%D9%88%D8%A7%D9%84%D8%A8%D9%82%D8%B1%D8%A9-%D9%86%D8%B3%D8%B1%D9%8A%D9%86-%D8%A7%D9%84%D9%86%D9%88%D8%B1/'},
+ {title:'تنين قوس الألوان — قصة للأطفال',url:'https://kidzooon.com/wp-content/uploads/2023/06/٢٥-مارس-١١.٠٥-ص_-online-audio-converter.com_.mp3',sourceUrl:'https://kidzooon.com/2021/10/the-rainbow-dragon.html'},
+ {title:'سلّة سلمى — قصة للأطفال',url:'https://kidzooon.com/wp-content/uploads/2023/06/سلة-سلمى-كامل.mp3',sourceUrl:'https://kidzooon.com/%D8%B3%D9%84%D8%A9-%D8%B3%D9%84%D9%85%D9%89-%D8%A8%D9%82%D9%84%D9%85-%D8%A7%D9%84%D8%AE%D9%86%D8%B3%D8%A7%D8%A1-%D8%B9%D8%A8%D8%A7%D8%B3-%D8%A7%D9%84%D8%B4%D9%87%D8%A7%D8%A8/'},
+ {title:'أين أمّي؟ — قصة مترجمة للأطفال',url:'https://kidzooon.com/wp-content/uploads/2023/06/2023_03_01_21_30_50.mp3',sourceUrl:'https://kidzooon.com/%D8%A3%D9%8A%D9%86-%D8%A3%D9%85%D9%8A-%D9%82%D8%B5%D8%A9-%D9%84%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84-%D8%AA%D8%B1%D8%AC%D9%85%D8%A9-%D8%AC%D9%86%D9%89-%D8%B3%D9%84%D9%8A%D9%82%D8%A9/'},
+ {title:'الغوص — قصة مترجمة للأطفال',url:'https://kidzooon.com/wp-content/uploads/2023/06/2023_04_16_18_36_38.mp3',sourceUrl:'https://kidzooon.com/2021/10/plongee.html'},
+ {title:'الفراشة البيضاء — قصة من أدب الأطفال',url:'https://kidzooon.com/wp-content/uploads/2023/06/2023_04_03_21_32_30.mp3',sourceUrl:'https://kidzooon.com/%D8%A7%D9%84%D9%81%D8%B1%D8%A7%D8%B4%D8%A9-%D8%A7%D9%84%D8%A8%D9%8A%D8%B6%D8%A7%D8%A1-%D8%A8%D9%88%D8%B1%D8%AC%D8%A7%D9%86-%D8%BA%D9%88%D8%A8%D9%8A%D8%AF%D9%88%D9%84%D9%8A%D9%86/'},
+ {title:'ثق بي، أنا أرنب — قصة مترجمة للأطفال',url:'https://kidzooon.com/wp-content/uploads/2023/06/2023_04_03_21_23_34.mp3',sourceUrl:'https://kidzooon.com/%D8%AB%D9%82-%D8%A8%D9%8A-%D8%A3%D9%86%D8%A7-%D8%A3%D8%B1%D9%86%D8%A8-%D8%AA%D8%B1%D8%AC%D9%85%D8%A9-%D8%AC%D9%86%D9%89-%D8%B3%D9%84%D9%8A%D9%82%D8%A9/'},
+ {title:'سيلين تصنع سيارة — قصة للأطفال',url:'https://kidzooon.com/wp-content/uploads/2023/06/سيلين-تصنع-سيارة.mp3',sourceUrl:'https://kidzooon.com/%D8%B3%D9%8A%D9%84%D9%8A%D9%86-%D8%AA%D8%B5%D9%86%D8%B9-%D8%B3%D9%8A%D8%A7%D8%B1%D8%A9-%D9%82%D8%B5%D8%A9-%D8%A8%D9%82%D9%84%D9%85-%D9%85%D8%A7%D9%84%D9%83-%D8%A7%D9%84%D8%B4%D9%88%D9%8A%D8%AE/'},
+ {title:'من رأسي إلى إصبع قدمي',url:'https://www.al-fanoos.org/wp-content/uploads/2023/07/من-رأسي-الى-اصبع-قدمي-1-1.mp3',sourceUrl:'https://www.al-fanoos.org/book/from_head_to_toe/'},
+ {title:'الفأر والتفاحة',url:'https://www.al-fanoos.org/wp-content/uploads/2023/07/الفأر-والتفاحة-1.mp3',sourceUrl:'https://www.al-fanoos.org/book/the_mouse_and_the_apple/'},
+ {title:'لا شيء في الهدية',url:'https://www.al-fanoos.org/wp-content/uploads/2023/07/لا-شيء-في-الهدية-1-1.mp3',sourceUrl:'https://www.al-fanoos.org/book/the_gift_of_nothing-2/'},
+ {title:'البوم الصغير ووشاحه البرتقالي',url:'https://www.al-fanoos.org/wp-content/uploads/2023/07/البوم-الصغير-1-1.mp3',sourceUrl:'https://www.al-fanoos.org/book-subject/%D8%A7%D9%84%D8%AA%D8%B9%D8%A8%D9%8A%D8%B1-%D8%A7%D9%84%D8%B9%D8%A7%D8%B7%D9%81%D9%8A/'},
+ {title:'يا طير الطاير',url:'https://www.al-fanoos.org/wp-content/uploads/2023/06/يا-طير-الطاير-.mp3',sourceUrl:'https://www.al-fanoos.org/book/ya-teir-altayer/'},
+ {title:'الدُّوب دوب الثلاثة — قصة قبل النوم للأطفال',url:'https://noorybooks.com/blog/wp-content/uploads/2026/06/نوري-مصور-الدوب-دوب-الثلاثة-كاملة-2.mp3',sourceUrl:'https://noorybooks.com/blog/الدُّوب-دوب-الثلاثة-قصة-قبل-النوم-صوتية-قصيرة-هادئة/'},
+ {title:'ليس الآن! — قصة للأطفال',url:'https://kidzooon.com/wp-content/uploads/2026/05/قصة-ليس-الان-1.mp3',sourceUrl:'https://kidzooon.com/%D9%82%D8%B5%D9%91%D8%A9-%D9%84%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84-%D9%84%D9%8A%D8%B3-%D8%A7%D9%84%D8%A2%D9%86-%D8%AA%D8%A3%D9%84%D9%8A%D9%81-%D8%A7%D9%84%D9%83%D8%A7%D8%AA%D8%A8%D8%A9-%D9%81%D8%B7/'},
+ {title:'حلم في سماء القرية — قصة للأطفال',url:'https://kidzooon.com/wp-content/uploads/2026/05/قصة-حلم-في-سماء-القرية-1.mp3',sourceUrl:'https://kidzooon.com/%D9%82%D8%B5%D9%91%D8%A9-%D9%84%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84-%D8%AD%D9%84%D9%85-%D9%81%D9%8A-%D8%B3%D9%85%D8%A7%D8%A1-%D8%A7%D9%84%D9%82%D8%B1%D9%8A%D8%A9-%D9%85%D9%86-%D8%AA%D8%A3%D9%84/'},
+ {title:'الذئب الحارس — قصة للأطفال',url:'https://kidzooon.com/wp-content/uploads/2023/03/الذئب-الحارس.mp3',sourceUrl:'https://kidzooon.com/%D8%A7%D9%84%D8%B0%D8%A6%D8%A8-%D8%A7%D9%84%D8%AD%D8%A7%D8%B1%D8%B3-%D8%A8%D9%82%D9%84%D9%85-%D9%86%D9%87%D8%A7%D9%88%D9%86%D8%AF-%D8%B3%D8%B9%D9%88%D8%AF/'}
+];
+const lib=document.getElementById('library'),search=document.getElementById('search');
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function render(){const q=search.value.trim().toLowerCase();const arr=data.filter(x=>x.title.toLowerCase().includes(q));document.getElementById('total').textContent=arr.length;document.getElementById('directTotal').textContent=data.length;lib.innerHTML=arr.map((x,i)=>`<article class="audio-card"><h3>▶ ${i+1}. ${esc(x.title)}</h3><audio controls preload="none" src="${esc(x.url)}"></audio><div class="audio-actions"><a class="download-btn" href="${esc(x.url)}" download target="_self" rel="noopener">⬇️ تنزيل الصوت</a></div></article>`).join('')||'<div class="empty-note">لا توجد نتائج.</div>'}
+search.addEventListener('input',render);render();
+</script>
+</body></html>
