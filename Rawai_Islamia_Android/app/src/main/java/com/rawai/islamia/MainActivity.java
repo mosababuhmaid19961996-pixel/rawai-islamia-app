@@ -55,5 +55,31 @@ public class MainActivity extends AppCompatActivity {
         });
         webView.loadUrl("https://appassets.androidplatform.net/assets/index.html");
     }
-    @Override public void onBackPressed() { if (webView.canGoBack()) webView.goBack(); else super.onBackPressed(); }
+    private long lastBackPress = 0L;
+    private int backPressCount = 0;
+
+    @Override public void onBackPressed() {
+        // داخل الأقسام: الرجوع الطبيعي عبر سجل WebView إلى الصفحة السابقة/الرئيسية.
+        if (webView != null && webView.canGoBack()) {
+            backPressCount = 0;
+            webView.goBack();
+            return;
+        }
+
+        // في الصفحة الرئيسية: لا نغلق التطبيق إلا بعد 3 ضغطات متتالية.
+        long now = System.currentTimeMillis();
+        if (now - lastBackPress > 2200L) {
+            backPressCount = 0;
+        }
+        backPressCount++;
+        lastBackPress = now;
+
+        if (backPressCount >= 3) {
+            super.onBackPressed();
+            return;
+        }
+
+        int remaining = 3 - backPressCount;
+        Toast.makeText(this, "اضغط زر الرجوع " + remaining + " مرات أخرى للخروج", Toast.LENGTH_SHORT).show();
+    }
 }
