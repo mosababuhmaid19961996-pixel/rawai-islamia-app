@@ -168,3 +168,16 @@ playButton=function(btn){_rawaiOriginalPlayButton(btn);updateRawaiPlayerTitle(bt
 function trackRawaiTime(){if(audio){try{const x=JSON.parse(localStorage.getItem('rawai-last-audio')||'{}');x.time=audio.currentTime;localStorage.setItem('rawai-last-audio',JSON.stringify(x))}catch(err){}}}
 setInterval(trackRawaiTime,1000);
 document.addEventListener('DOMContentLoaded',()=>{if(localStorage.getItem('rawai-dark')==='true')document.body.classList.add('dark');const theme=document.getElementById('theme');if(theme)theme.onclick=()=>{const on=!document.body.classList.contains('dark');document.body.classList.toggle('dark',on);localStorage.setItem('rawai-dark',on?'true':'false')};updateGlobalPlayer();injectAudioActions();const nav=document.querySelector('nav');if(nav&&!nav.querySelector('a[href="more.html"]')){const a=document.createElement('a');a.href='more.html';a.textContent='المزيد';nav.appendChild(a)}});
+
+
+// قسم الأدوات: فتح وإغلاق جميع الأدوات من زر واحد.
+document.addEventListener('DOMContentLoaded',()=>{
+  const toggle=document.getElementById('toolsToggle');
+  const panel=document.getElementById('homeTools');
+  if(!toggle||!panel)return;
+  toggle.addEventListener('click',()=>{
+    const open=toggle.getAttribute('aria-expanded')==='true';
+    toggle.setAttribute('aria-expanded',open?'false':'true');
+    panel.hidden=open;
+  });
+});
