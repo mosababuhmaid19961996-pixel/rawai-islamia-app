@@ -56,3 +56,22 @@
 .tools-arrow{font-size:28px;line-height:1;transition:transform .2s ease;color:var(--green);padding:4px 8px}
 .tools-toggle[aria-expanded="true"] .tools-arrow{transform:rotate(180deg)}
 .tools-grid[hidden]{display:none}
+
+/* مجموعات المحتوى القابلة للفتح والإغلاق */
+.content-groups{display:grid;gap:14px}
+.content-group{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,53,45,.05)}
+.content-group>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:17px 20px;cursor:pointer;background:linear-gradient(180deg,rgba(237,246,243,.65),rgba(255,255,255,0));font-size:14px}
+.content-group>summary::-webkit-details-marker{display:none}
+.content-group>summary>span{display:flex;flex-direction:column;gap:2px;min-width:0}
+.content-group>summary small{font-size:9px;color:var(--green);font-weight:800}
+.content-group>summary b{font-size:17px}
+.content-group>summary em{font-size:10px;color:var(--muted);font-style:normal}
+.content-group>summary>i{font-style:normal;font-size:25px;color:var(--green);transition:transform .2s ease}
+.content-group[open]>summary>i{transform:rotate(180deg)}
+.content-group[open]>summary{border-bottom:1px solid var(--line)}
+.group-content{padding:16px}
+.tool-group .group-content{display:grid;gap:0}
+.tool-group .tool-section{margin:0;border:0;border-radius:0;box-shadow:none;border-bottom:1px solid var(--line)}
+.tool-group .tool-section:last-child{border-bottom:0}
+@media(max-width:600px){.content-group>summary{padding:15px}.content-group>summary b{font-size:15px}.group-content{padding:10px}.group-content.six{grid-template-columns:1fr 1fr}}
+.dark .content-group>summary{background:rgba(23,59,53,.55)}
