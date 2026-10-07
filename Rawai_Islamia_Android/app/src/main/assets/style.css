@@ -46,3 +46,13 @@
 .dark{--bg:#081714;--surface:#10211d;--ink:#e7f3ef;--muted:#9bb1ab;--line:#23433d}.dark header{background:#051f1d}.dark .tool-card,.dark .tool-section,.dark .saved-item,.dark .tasbih-box{background:var(--surface);color:var(--ink)}
 @media(max-width:900px){.tools-grid{grid-template-columns:repeat(3,1fr)}.prayer-result{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){.tools-grid{grid-template-columns:repeat(2,1fr)}.tool-section{padding:16px}.achievement-grid{grid-template-columns:1fr}.prayer-result{grid-template-columns:repeat(2,1fr)}#rawaiGlobalPlayer{bottom:6px;left:6px;right:6px}.rawai-now b{max-width:130px}.rawai-player-controls button{width:32px;height:32px}.rawai-player-controls button:nth-child(1),.rawai-player-controls button:nth-child(3){display:none}}
 .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:20px}.video-card{overflow:hidden;border:1px solid #dfe8e4;border-radius:18px;background:#fff;box-shadow:0 5px 20px #0000000d}.video-thumb{height:130px;display:grid;place-items:center;background:linear-gradient(135deg,#087c68,#d7b45a);color:#fff;font-size:48px}.video-body{padding:15px}.video-body span{font-size:12px;color:#087c68}.video-body h3{font-size:16px;min-height:48px}.video-search{width:100%;padding:15px;border:1px solid #dfe8e4;border-radius:14px;font-size:16px}.video-filters{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}.video-filters .active{background:#087c68;color:#fff}
+
+
+/* أدوات موحدة قابلة للفتح والإغلاق */
+.tools-center-section .heading{margin-bottom:0}
+.tools-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;border:0;background:transparent;color:var(--ink);padding:0;text-align:right;cursor:pointer;font:inherit}
+.tools-toggle span:first-child{display:flex;flex-direction:column;align-items:flex-start}
+.tools-toggle h2{margin:5px 0 0}
+.tools-arrow{font-size:28px;line-height:1;transition:transform .2s ease;color:var(--green);padding:4px 8px}
+.tools-toggle[aria-expanded="true"] .tools-arrow{transform:rotate(180deg)}
+.tools-grid[hidden]{display:none}
