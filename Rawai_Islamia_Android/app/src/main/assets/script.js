@@ -44,13 +44,20 @@ window.addEventListener('storage',e=>{
 
 function playButton(btn){
   const src=btn.dataset.audio;if(!src)return;
-  stopEverything();
-  announcePlayback(src);
+  // إذا كان نفس المقطع يعمل، فالضغط على الزر يوقفه/يشغله بدل أن يعيد تشغيله.
   if(audio&&audio.src===src){
-    if(audio.paused){audio.play().catch(()=>{});btn.textContent='❚❚'}
-    else{audio.pause();btn.textContent='▶'}
+    if(audio.paused){
+      audio.play().catch(()=>{});
+      btn.textContent='❚❚';
+      announcePlayback(src);
+    }else{
+      audio.pause();
+      btn.textContent='▶';
+    }
     return;
   }
+  stopEverything();
+  announcePlayback(src);
   if(audio)audio.pause();
   audio=new Audio(src);
   audio.setAttribute('playsinline','');
