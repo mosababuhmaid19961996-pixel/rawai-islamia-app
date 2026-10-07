@@ -99,6 +99,19 @@ public class MainActivity extends AppCompatActivity {
         public boolean notificationsEnabled() {
             return NotificationScheduler.isEnabled(MainActivity.this);
         }
+
+        @JavascriptInterface
+        public String notificationTimes() {
+            return NotificationScheduler.getTimes(MainActivity.this);
+        }
+
+        @JavascriptInterface
+        public void setNotificationTimes(String times) {
+            runOnUiThread(() -> {
+                NotificationScheduler.setTimes(MainActivity.this, times);
+                Toast.makeText(MainActivity.this, "تم حفظ أوقات التذكير", Toast.LENGTH_SHORT).show();
+            });
+        }
     }
 
     private long lastBackPress = 0L;
