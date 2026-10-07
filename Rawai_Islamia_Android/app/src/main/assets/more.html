@@ -20,7 +20,6 @@
 <a class="tool-card" href="#tasbih"><span>📿</span><b>المسبحة الإلكترونية</b><small>عداد محفوظ حتى بعد إغلاق التطبيق</small></a>
 <a class="tool-card" href="#wird"><span>📖</span><b>وردي اليومي</b><small>أذكار وتلاوة واستغفار يومي</small></a>
 <a class="tool-card" href="#prayer"><span>🕌</span><b>مواقيت الصلاة</b><small>اختر مدينتك وشاهد مواقيت اليوم</small></a>
-<a class="tool-card" href="#achievements"><span>🏆</span><b>الإنجازات</b><small>تابع تقدمك في الاستماع والذكر</small></a>
 <a class="tool-card" href="khatma.html"><span>📖</span><b>ختمة القرآن</b><small>متابعة ختمة محفوظة</small></a>
 <a class="tool-card" href="qibla.html"><span>🧭</span><b>بوصلة القبلة</b><small>اتجاه تقريبي للقبلة</small></a>
 <a class="tool-card" href="adhkar-advanced.html"><span>📿</span><b>أذكار متقدمة</b><small>عدادات يومية</small></a>
@@ -50,7 +49,6 @@
 <section id="prayer" class="tool-section"><div class="tool-heading"><div><small>اليوم</small><h2>🕌 مواقيت الصلاة</h2></div></div>
 <div class="prayer-form"><label>المدينة <select id="citySelect"><option value="Nablus">نابلس</option><option value="Ramallah">رام الله</option><option value="Jerusalem">القدس</option><option value="Gaza">غزة</option><option value="Hebron">الخليل</option><option value="Jenin">جنين</option><option value="Tulkarm">طولكرم</option></select></label><button class="primary" onclick="loadPrayerTimes()">عرض المواقيت</button></div><div id="prayerResult" class="prayer-result"></div></section>
 
-<section id="achievements" class="tool-section"><div class="tool-heading"><div><small>تقدمك</small><h2>🏆 الإنجازات</h2></div></div><div id="achievementsList" class="achievement-grid"></div></section>
 </main>
 <footer><b>روائع إسلامية</b><span>استمع • اذكر الله • تعلم</span></footer>
 <script src="script.js"></script>
@@ -70,15 +68,11 @@ window.tasbihReset=()=>{localStorage.setItem(TKEY,0);renderT()};
 window.tasbihSet=n=>{localStorage.setItem(TKEY,n);renderT()};
 function renderW(){const data=JSON.parse(localStorage.getItem(WKEY)||'{}');document.querySelectorAll('[data-wird]').forEach(x=>x.checked=!!data[x.dataset.wird]);updateW()}
 function updateW(){const all=[...document.querySelectorAll('[data-wird]')],done=all.filter(x=>x.checked).length;document.getElementById('wirdProgress').textContent='أنجزت '+done+' من '+all.length+' اليوم — '+Math.round(done/all.length*100)+'%';const d={};all.forEach(x=>d[x.dataset.wird]=x.checked);localStorage.setItem(WKEY,JSON.stringify(d));localStorage.setItem('rawai-ach-wird',done)}
-document.querySelectorAll('[data-wird]').forEach(x=>x.addEventListener('change',()=>{updateW();ach();}));
-window.addEventListener('hashchange',()=>{if(location.hash==='#achievements'){const el=document.getElementById('achievements');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});ach();}});
 
 window.resetWird=()=>{localStorage.removeItem(WKEY);renderW()};
 window.loadPrayerTimes=async()=>{const city=document.getElementById('citySelect').value,box=document.getElementById('prayerResult');box.innerHTML='<div class="loading">جارٍ جلب المواقيت...</div>';try{const d=new Date(),date=d.getDate()+'-'+(d.getMonth()+1)+'-'+d.getFullYear();const r=await fetch('https://api.aladhan.com/v1/timingsByCity/'+date+'?city='+encodeURIComponent(city)+'&country=Palestine&method=4');const j=await r.json();const p=j.data.timings;const names=[['Fajr','الفجر'],['Sunrise','الشروق'],['Dhuhr','الظهر'],['Asr','العصر'],['Maghrib','المغرب'],['Isha','العشاء']];box.innerHTML=names.map(x=>'<div class="prayer-card"><b>'+x[1]+'</b><strong>'+p[x[0]]+'</strong></div>').join('')}catch(e){box.innerHTML='<div class="empty-note">تعذر جلب المواقيت الآن. تحقق من الاتصال بالإنترنت.</div>'}};
 function ach(){const tas=Number(localStorage.getItem('rawai-ach-tasbih')||0),w=Number(localStorage.getItem('rawai-ach-wird')||0),fav=getF().length;const arr=[['📿','ذاكر','100 تسبيحة على الأقل',tas>=100],['📖','ورد ثابت','إنجاز ورد اليوم كاملًا',w>=5],['❤️','ذوق جميل','حفظ 5 مقاطع في المفضلة',fav>=5],['🌟','بداية مباركة','فتح مركز الأدوات',true]];document.getElementById('achievementsList').innerHTML=arr.map(a=>'<div class="achievement '+(a[3]?'done':'')+'"><span>'+a[0]+'</span><div><b>'+a[1]+'</b><small>'+a[2]+'</small></div><strong>'+(a[3]?'✓':'○')+'</strong></div>').join('')}
-renderF();renderT();renderW();ach();
-window.addEventListener('storage',e=>{if([FKEY,WKEY,TKEY,'rawai-ach-tasbih','rawai-ach-wird'].includes(e.key)){renderF();renderT();renderW();ach();}});
-if(location.hash==='#achievements'){setTimeout(()=>{const el=document.getElementById('achievements');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);}
+renderF();renderT();renderW();
 
 })();
 </script>
