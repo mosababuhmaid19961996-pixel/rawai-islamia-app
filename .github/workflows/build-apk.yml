@@ -1,0 +1,41 @@
+name: Build Rawai Islamia APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'Rawai_Islamia_Android/**'
+      - '.github/workflows/build-apk.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Rawai_Islamia_Android
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle 8.13
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+
+      - name: Build debug APK
+        run: gradle assembleDebug --no-daemon
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Rawai-Islamia-debug-apk
+          path: Rawai_Islamia_Android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
