@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="إعدادات روائع إسلامية">
+<title>الإعدادات - روائع إسلامية</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="logo" href="index.html"><span class="logo-mark">⌂</span><span><b>روائع إسلامية</b><small>الإعدادات</small></span></a>
+  <nav><a href="index.html">الرئيسية</a><a class="active" href="settings.html">الإعدادات</a></nav>
+  <div class="head-actions"><a class="icon-btn settings-link" href="settings.html">⚙</a><button id="theme" class="icon-btn">☾</button></div>
+</header>
+<main class="inside settings-page">
+  <a class="back" href="index.html">← العودة للرئيسية</a>
+  <section class="section-hero settings-hero">
+    <small>تخصيص التطبيق</small>
+    <h1>الإعدادات</h1>
+    <p>تحكم في التذكيرات الدينية وطريقة تشغيل المقاطع الصوتية.</p>
+  </section>
+
+  <section class="settings-list">
+    <div class="setting-card">
+      <div class="setting-icon">🔔</div>
+      <div class="setting-info">
+        <h2>التذكيرات الدينية</h2>
+        <p>إشعار ديني جديد كل 3 ساعات، مع مجموعة من الأذكار والتذكيرات.</p>
+        <button id="notificationPermission" class="setting-action">السماح بالإشعارات</button>
+      </div>
+      <label class="switch"><input id="notificationsToggle" type="checkbox"><span></span></label>
+    </div>
+
+    <div class="setting-card">
+      <div class="setting-icon">▶</div>
+      <div class="setting-info">
+        <h2>التشغيل التلقائي</h2>
+        <p>عند انتهاء المقطع الحالي، يبدأ المقطع الصوتي التالي تلقائيًا.</p>
+      </div>
+      <label class="switch"><input id="autoPlayToggle" type="checkbox"><span></span></label>
+    </div>
+  </section>
+</main>
+<footer><b>روائع إسلامية</b><span>إعدادات التطبيق</span></footer>
+<script src="script.js"></script>
+<script>
+(function(){
+  const n=document.getElementById('notificationsToggle');
+  const a=document.getElementById('autoPlayToggle');
+  const p=document.getElementById('notificationPermission');
+
+  a.checked=isAutoPlayEnabled();
+  a.addEventListener('change',()=>setAutoPlayEnabled(a.checked));
+
+  n.checked=isNotificationsEnabled();
+  n.addEventListener('change',()=>{
+    if(!setNotificationsEnabled(n.checked)) {
+      n.checked=false;
+      alert('هذه الخاصية تعمل داخل تطبيق روائع إسلامية على أندرويد.');
+    }
+  });
+
+  p.addEventListener('click',()=>{
+    if(window.Android&&typeof Android.requestNotifications==='function'){
+      Android.requestNotifications();
+      alert('إذا ظهر طلب السماح بالإشعارات، اختر السماح لتفعيل التذكيرات.');
+    }else{
+      alert('هذه الخاصية تعمل داخل تطبيق روائع إسلامية على أندرويد.');
+    }
+  });
+})();
+</script>
+</body>
+</html>
